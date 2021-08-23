@@ -24,3 +24,6 @@ def preview_images(image_count, path, figsize = (20,20)):
         ax.title.set_text(file)
         plt.axis('off')
         plt.imshow(img)
+
+def load_images():
+    pass
