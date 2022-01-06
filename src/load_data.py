@@ -38,7 +38,7 @@ def load_images(path):
     
     images= []
     
-    for i in glob.iglob(path):
+    for i in glob.iglob(path + "/*.png"):
         images.append(np.asarray(Image.open(i)))
     images= np.array(images)
     
