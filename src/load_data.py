@@ -6,26 +6,24 @@ import matplotlib.image as mpimg
 import glob
 from PIL import Image
 
-def preview_images(image_count, path, figsize = (20,20)):
-    """Publishes matplotlib visualization showing randomly selected images from folder set by path variable.
+def preview_images(data, num_images, figsize):
+    """Publishes matplotlib visualization showing randomly selected images from tensor
 
     Args:
-        image_count (int): number of images you would like randomly chosen for visualization
-        path (string): string path to folder containing images for visualization on local machine
+        data (np.array): Contains array of image data
+        num_images:number of images you would like randomly chosen for visualization
         figsize (tuple): tuple contain plot dimensions for matplotlib plot
     """
+    
+    assert num_images>0, "Number must be greater than 0"
     plt.figure(figsize=figsize)
 
-    target_data= path
+    rand_index= np.random.randint(0, len(data), num_images)
 
-    for i in range(image_count):
-        file= random.choice(os.listdir(target_data))
-        image_path= os.path.join(target_data, file)
-        img= mpimg.imread(image_path)
-        ax= plt.subplot(1,image_count, i+1)
-        ax.title.set_text(file)
+    for i, value in enumerate(rand_index):
+        ax= plt.subplot(1, num_images, i+1)
         plt.axis('off')
-        plt.imshow(img)
+        plt.imshow(data[value])
 
 def load_images(path):
     """Returns an array of loaded images from specified path on local machine
